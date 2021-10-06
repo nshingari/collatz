@@ -10,7 +10,9 @@
 # collatz_read
 # ------------
 
+# global variable for eager cache
 MEMO = {}
+
 
 def collatz_read(s):
     """
@@ -25,15 +27,17 @@ def collatz_read(s):
 # collatz_eval
 # ------------
 
-def cycle_length (n) :
+# cycle length function that starts with cycle length of one 
+def cycle_length(n):
     assert n > 0
     c = 1
-    while n > 1 :
-        if (n % 2) == 0 :
+    while n > 1:
+        if (n % 2) == 0:
             n = (n // 2)
-        else :
+        else:
             n = (3 * n) + 1
         c += 1
+    # makes sure cycle length is positive 
     assert c > 0
     return c
 
@@ -46,15 +50,17 @@ def collatz_eval(i, j):
     """
     assert i > 0
     assert j > 0
-    # swap if i is greater than j 
+    # swap if i is greater than j
     if i > j:
         j = i + j
-        i = j - i   
+        i = j - i
         j = j - i
     max = 1
-    for x in range(i,j+1):
+    for x in range(i, j+1):
+        # if x is in eager cache gets the answer
         if x in MEMO:
             ans = MEMO[x]
+        # if not in cache adds it 
         if x not in MEMO:
             ans = cycle_length(x)
             MEMO[x] = ans
