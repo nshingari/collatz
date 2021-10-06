@@ -10,6 +10,7 @@
 # collatz_read
 # ------------
 
+MEMO = {}
 
 def collatz_read(s):
     """
@@ -45,9 +46,18 @@ def collatz_eval(i, j):
     """
     assert i > 0
     assert j > 0
+    # swap if i is greater than j 
+    if i > j:
+        j = i + j
+        i = j - i   
+        j = j - i
     max = 1
     for x in range(i,j+1):
-        ans = cycle_length(x)
+        if x in MEMO:
+            ans = MEMO[x]
+        if x not in MEMO:
+            ans = cycle_length(x)
+            MEMO[x] = ans
         if ans > max:
             max = ans
         if ans < max:
