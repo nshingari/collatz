@@ -36,7 +36,7 @@ class TestCollatz (TestCase):
     def test_read_2(self):
         s = "500 999999\n"
         i, j = collatz_read(s)
-        self.assertEqual(i,  1)
+        self.assertEqual(i,  500)
         self.assertEqual(j, 999999)
 
     def test_read_3(self):
@@ -93,21 +93,21 @@ class TestCollatz (TestCase):
         w = StringIO()
         collatz_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "1 10 1\n100 200 1\n201 210 1\n900 1000 1\n")
+            w.getvalue(), "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n")
 
     def test_solve_2(self):
         r = StringIO("7 100\n560 2060\n28901 29810\n700 1700\n")
         w = StringIO()
         collatz_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "7 100\n560 2060\n28901 29810\n700 1700\n")
+            w.getvalue(), "7 100 119\n560 2060 182\n28901 29810 272\n700 1700 182\n")
 
     def test_solve_3(self):
         r = StringIO("99 1880\n80 29060\n7901 8910\n70 170\n")
         w = StringIO()
         collatz_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "99 1880\n80 29060\n7901 8910\n70 170\n")
+            w.getvalue(), "99 1880 182\n80 29060 308\n7901 8910 252\n70 170 122\n")
 
 # ----
 # main
